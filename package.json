@@ -12,6 +12,7 @@
   "devDependencies": {
     "autoprefixer": "^10.2.5",
     "css-loader": "^5.2.4",
+    "html-loader": "^2.1.2",
     "html-webpack-plugin": "^5.3.1",
     "mini-css-extract-plugin": "^1.6.0",
     "postcss": "^8.2.14",

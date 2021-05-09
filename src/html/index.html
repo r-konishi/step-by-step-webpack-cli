@@ -5,6 +5,8 @@
         <title>Webpack App</title>
     </head>
     <body>
+        <%= require('html-loader!./template/header.html').default %>
+        
         <h1>Hello world!</h1>
         <h2>Tip: Check your console</h2>
     </body>
