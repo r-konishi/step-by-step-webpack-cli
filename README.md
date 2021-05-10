@@ -26,3 +26,7 @@ $ npm install --global webpack webpack-cli @webpack-cli/generators
 ## Step. 3: HTML テンプレートの導入
 
 [step3.md を参照](docs/step3.md)
+
+## Step. 4: SASS ファイルの追加と設定
+
+[step4.md を参照](docs/step4.md)

@@ -12,6 +12,7 @@ const config = {
     entry: './src/index.ts',
     output: {
         path: path.resolve(__dirname, 'dist'),
+        clean: true,
     },
     devServer: {
         open: true,
@@ -22,7 +23,10 @@ const config = {
             template: path.resolve(__dirname, 'src/html/index.html'),
         }),
 
-        new MiniCssExtractPlugin(),
+        new MiniCssExtractPlugin({
+            filename: 'css/[name].css',
+            chunkFilename: 'css/[id]_[name]_[hash].css',
+        }),
 
         // Add your plugins here
         // Learn more about plugins from https://webpack.js.org/configuration/plugins/
