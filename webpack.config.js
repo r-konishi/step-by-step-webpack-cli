@@ -1,6 +1,7 @@
 // Generated using webpack-cli https://github.com/webpack/webpack-cli
 
 const path = require('path');
+const glob = require('glob');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
@@ -9,9 +10,14 @@ const isProduction = process.env.NODE_ENV == 'production';
 const stylesHandler = MiniCssExtractPlugin.loader;
 
 const config = {
-    entry: './src/index.ts',
+    entry: {
+        common: './src/common.ts',
+    },
+    devtool: 'inline-source-map',
     output: {
         path: path.resolve(__dirname, 'dist'),
+        filename: 'js/[name].js',
+        chunkFilename: 'js/[id]_[name]_[hash].js',
         clean: true,
     },
     devServer: {
@@ -19,10 +25,6 @@ const config = {
         host: 'localhost',
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, 'src/html/index.html'),
-        }),
-
         new MiniCssExtractPlugin({
             filename: 'css/[name].css',
             chunkFilename: 'css/[id]_[name]_[hash].css',
@@ -66,6 +68,25 @@ const config = {
 };
 
 module.exports = () => {
+    glob.sync('**/*.ts', {
+        cwd: 'src/ts',
+    }).forEach((tsName) => {
+        // baseName がかぶることがあるので注意
+        const baseName = path.basename(tsName, '.ts');
+        config.entry[baseName] = path.resolve(__dirname, 'src/ts/' + tsName);
+
+        const htmlFileName = baseName + '.html';
+
+        config.plugins.push(
+            new HtmlWebpackPlugin({
+                template: path.resolve(__dirname, 'src/html/' + htmlFileName),
+                filename: baseName + '.html',
+                includeSiblingChunks: true,
+                chunks: ['common', baseName],
+            })
+        );
+    });
+
     if (isProduction) {
         config.mode = 'production';
     } else {

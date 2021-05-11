@@ -30,3 +30,7 @@ $ npm install --global webpack webpack-cli @webpack-cli/generators
 ## Step. 4: SASS ファイルの追加と設定
 
 [step4.md を参照](docs/step4.md)
+
+## Step. 5: 各 HTML ごとに別 TypeScript を読み込む
+
+[step5.md を参照](docs/step5.md)
