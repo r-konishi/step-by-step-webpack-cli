@@ -15,7 +15,7 @@ body {
 }
 ```
 
--   `src/scss/import.scss` ファイルの追加
+-   `src/scss/imports.scss` ファイルの追加
 
 ```scss
 @charset "UTF-8";
